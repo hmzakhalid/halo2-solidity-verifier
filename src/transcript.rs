@@ -1,4 +1,4 @@
-use halo2_proofs::{
+use halo2_base::halo2_proofs::{
     halo2curves::{ff::PrimeField, Coordinates, CurveAffine},
     transcript::{
         EncodedChallenge, Transcript, TranscriptRead, TranscriptReadBuffer, TranscriptWrite,

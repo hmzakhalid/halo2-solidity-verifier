@@ -3,7 +3,7 @@ use crate::codegen::{
     template::{Halo2Verifier, Halo2VerifyingKey},
     util::{fr_to_u256, g1_to_u256s, g2_to_u256s, ConstraintSystemMeta, Data, Ptr},
 };
-use halo2_proofs::{
+use halo2_base::halo2_proofs::{
     halo2curves::{bn256, ff::Field},
     plonk::VerifyingKey,
     poly::{commitment::ParamsProver, kzg::commitment::ParamsKZG, Rotation},
@@ -35,7 +35,7 @@ pub struct SolidityGenerator<'a> {
 ///
 /// Given instances and `AccumulatorEncoding`, the accumulator will be interpreted as below:
 /// ```rust
-/// use halo2_proofs::halo2curves::{bn256, ff::{Field, PrimeField}, CurveAffine};
+/// use halo2_base::halo2_proofs::halo2curves::{bn256, ff::{Field, PrimeField}, CurveAffine};
 ///
 /// fn accumulator_from_limbs(
 ///     instances: &[bn256::Fr],

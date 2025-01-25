@@ -1,5 +1,5 @@
 use crate::codegen::util::{fr_to_u256, to_u256_be_bytes};
-use halo2_proofs::halo2curves::bn256;
+use halo2_base::halo2_proofs::halo2curves::bn256;
 use itertools::chain;
 use ruint::aliases::U256;
 

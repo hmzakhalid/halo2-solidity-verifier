@@ -2,7 +2,7 @@ use crate::codegen::{
     template::Halo2VerifyingKey,
     BatchOpenScheme::{self, Bdfg21, Gwc19},
 };
-use halo2_proofs::{
+use halo2_base::halo2_proofs::{
     halo2curves::{bn256, ff::PrimeField, CurveAffine},
     plonk::{Any, Column, ConstraintSystem},
 };

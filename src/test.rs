@@ -8,7 +8,7 @@ use crate::{
     evm::test::{compile_solidity, Evm},
     FN_SIG_VERIFY_PROOF, FN_SIG_VERIFY_PROOF_WITH_VK_ADDRESS,
 };
-use halo2_proofs::halo2curves::bn256::{Bn256, Fr};
+use halo2_base::halo2_proofs::halo2curves::bn256::{Bn256, Fr};
 use rand::{rngs::StdRng, RngCore, SeedableRng};
 use sha3::Digest;
 use std::{fs::File, io::Write};
@@ -160,7 +160,7 @@ mod halo2 {
         transcript::Keccak256Transcript,
         BatchOpenScheme::{self, Bdfg21, Gwc19},
     };
-    use halo2_proofs::{
+    use halo2_base::halo2_proofs::{
         arithmetic::CurveAffine,
         halo2curves::{
             bn256,
@@ -320,7 +320,7 @@ mod halo2 {
             codegen::AccumulatorEncoding,
             test::halo2::{random_accumulator_limbs, TestCircuit},
         };
-        use halo2_proofs::{
+        use halo2_base::halo2_proofs::{
             arithmetic::CurveAffine,
             circuit::{Layouter, SimpleFloorPlanner, Value},
             halo2curves::{
@@ -472,12 +472,12 @@ mod halo2 {
                         }
                         for (idx, column) in izip!(1.., fixeds) {
                             let value = Value::known(M::Fr::from(idx));
-                            region.assign_fixed(|| "", column, next_offset(), || value)?;
+                            region.assign_fixed( column, next_offset(), || value)?;
                         }
                         izip!(advices, &self.0)
                             .map(|(column, value)| {
                                 let value = Value::known(*value);
-                                region.assign_advice(|| "", column, next_offset(), || value)
+                                region.assign_advice( column, next_offset(), || value)
                             })
                             .try_collect::<_, Vec<_>, _>()
                     },
@@ -499,7 +499,7 @@ mod halo2 {
             MainGate, MainGateConfig, MainGateInstructions, RangeChip, RangeConfig,
             RangeInstructions, RegionCtx,
         };
-        use halo2_proofs::{
+        use halo2_base::halo2_proofs::{
             arithmetic::CurveAffine,
             circuit::{Layouter, SimpleFloorPlanner, Value},
             halo2curves::{

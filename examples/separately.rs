@@ -77,7 +77,7 @@ fn create_proof_checked(
     instances: &[Fr],
     mut rng: impl RngCore,
 ) -> Vec<u8> {
-    use halo2_proofs::{
+    use halo2_base::halo2_proofs::{
         poly::kzg::{
             multiopen::{ProverSHPLONK, VerifierSHPLONK},
             strategy::SingleStrategy,
@@ -191,22 +191,17 @@ mod application {
                 || "",
                 |mut region| {
                     for (offset, instance) in self.0.iter().enumerate() {
-                        region.assign_advice(|| "", w_l, offset, || Value::known(*instance))?;
-                        region.assign_fixed(|| "", q_l, offset, || Value::known(-F::ONE))?;
+                        region.assign_advice(w_l, offset, || Value::known(*instance))?;
+                        region.assign_fixed(q_l, offset, || Value::known(-F::ONE))?;
                     }
                     let offset = self.0.len();
-                    let a = region.assign_advice(|| "", w_l, offset, || Value::known(F::ONE))?;
+                    let a = region.assign_advice(w_l, offset, || Value::known(F::ONE))?;
                     a.copy_advice(|| "", &mut region, w_r, offset)?;
                     a.copy_advice(|| "", &mut region, w_o, offset)?;
                     let offset = offset + 1;
-                    region.assign_advice(|| "", w_l, offset, || Value::known(-F::from(5)))?;
+                    region.assign_advice(w_l, offset, || Value::known(-F::from(5)))?;
                     for (column, idx) in [q_l, q_r, q_o, q_m, q_c].iter().zip(1..) {
-                        region.assign_fixed(
-                            || "",
-                            *column,
-                            offset,
-                            || Value::known(F::from(idx)),
-                        )?;
+                        region.assign_fixed(*column, offset, || Value::known(F::from(idx)))?;
                     }
                     Ok(())
                 },
@@ -216,7 +211,7 @@ mod application {
 }
 
 mod prelude {
-    pub use halo2_proofs::{
+    pub use halo2_base::halo2_proofs::{
         circuit::{Layouter, SimpleFloorPlanner, Value},
         halo2curves::{
             bn256::{Bn256, Fr, G1Affine},

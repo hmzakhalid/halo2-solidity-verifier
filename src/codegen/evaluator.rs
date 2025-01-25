@@ -1,7 +1,7 @@
 #![allow(clippy::useless_format)]
 
 use crate::codegen::util::{code_block, fe_to_u256, ConstraintSystemMeta, Data};
-use halo2_proofs::{
+use halo2_base::halo2_proofs::{
     halo2curves::ff::PrimeField,
     plonk::{
         Advice, AdviceQuery, Any, Challenge, ConstraintSystem, Expression, Fixed, FixedQuery, Gate,
