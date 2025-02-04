@@ -13,7 +13,7 @@ mod transcript;
 #[cfg(test)]
 mod test;
 
-pub use codegen::{AccumulatorEncoding, BatchOpenScheme, SolidityGenerator};
+pub use codegen::{AccumulatorEncoding, BatchOpenScheme, SolidityGenerator, util::{fr_to_u256, to_u256_be_bytes}};
 pub use evm::{encode_calldata, FN_SIG_VERIFY_PROOF, FN_SIG_VERIFY_PROOF_WITH_VK_ADDRESS};
 pub use transcript::Keccak256Transcript;
 

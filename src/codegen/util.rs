@@ -659,8 +659,8 @@ pub(crate) fn g2_to_u256s(ec_point: impl Borrow<bn256::G2Affine>) -> [U256; 4] {
 pub(crate) fn fq_to_u256(fe: impl Borrow<bn256::Fq>) -> U256 {
     fe_to_u256(fe)
 }
-
-pub(crate) fn fr_to_u256(fe: impl Borrow<bn256::Fr>) -> U256 {
+/// Convert a field element to a u256
+pub fn fr_to_u256(fe: impl Borrow<bn256::Fr>) -> U256 {
     fe_to_u256(fe)
 }
 
@@ -671,7 +671,8 @@ where
     U256::from_le_bytes(fe.borrow().to_repr())
 }
 
-pub(crate) fn to_u256_be_bytes<T>(value: T) -> [u8; 32]
+/// Convert a value to a u256
+pub fn to_u256_be_bytes<T>(value: T) -> [u8; 32]
 where
     U256: UintTryFrom<T>,
 {
